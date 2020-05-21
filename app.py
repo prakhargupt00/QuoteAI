@@ -165,13 +165,14 @@ class Quote(Resource):
         
         m = MultipartEncoder(
            fields={'field0': 'value', 'field1': 'value',
-                   'field2': ('filename', open('app.py', 'rb'), 'text/plain')}
+                   'field2': ('filename', open('app.py', 'r'), 'text/plain')}
         )
 
-        return Response(m.to_string(), mimetype=m.content_type)
+       
+        #return Response(m.to_string(), mimetype=m.content_type)
 
-        #message = { "message ": f"Quote with id {id} deleted" }
-        #return message, 200
+        message = { "message ": f"Quote with id {id} deleted" }
+        return message, 200
 
 
 
