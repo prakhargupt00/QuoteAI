@@ -1,5 +1,6 @@
-from flask import Flask 
+from flask import Flask,Response 
 from flask_restful import Api, Resource, reqparse
+from requests_toolbelt import MultipartEncoder
 import random 
 
 
@@ -161,8 +162,16 @@ class Quote(Resource):
     def delete(self, id):
         global  ai_quotes
         ai_quotes = [quote for quote in ai_quotes if quote["id"] != id ]
-        message = { "message ": f"Quote with id {id} deleted" }
-        return message, 200
+        
+        m = MultipartEncoder(
+           fields={'field0': 'value', 'field1': 'value',
+                   'field2': ('filename', open('app.py', 'rb'), 'text/plain')}
+        )
+
+        return Response(m.to_string(), mimetype=m.content_type)
+
+        #message = { "message ": f"Quote with id {id} deleted" }
+        #return message, 200
 
 
 
