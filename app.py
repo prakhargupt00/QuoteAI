@@ -161,7 +161,8 @@ class Quote(Resource):
     def delete(self, id):
         global  ai_quotes
         ai_quotes = [quote for quote in ai_quotes if quote["id"] != id ]
-        return f"Quote with id {id} is deleted.", 200
+        message = { "message ": f"Quote with id {id} deleted" }
+        return message, 200
 
 
 
